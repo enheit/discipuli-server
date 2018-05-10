@@ -1,0 +1,1 @@
+export { default as authenticated } from './authentication-check';
