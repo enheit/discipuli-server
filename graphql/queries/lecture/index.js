@@ -1,0 +1,1 @@
+export { default as LectureById } from './lectures-by-id';

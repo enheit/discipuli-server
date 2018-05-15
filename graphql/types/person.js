@@ -5,8 +5,6 @@ import {
   GraphQLNonNull,
 } from 'graphql';
 
-import PersonRole from './person-role';
-
 export default new GraphQLObjectType({
   name: 'Person',
   description: 'The user of the application',
