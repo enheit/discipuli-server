@@ -1,7 +1,9 @@
 import { DataTypes } from 'sequelize';
 import sequelize from './models.setup';
 
-import LectureStatus from './lecture-status.model';
+import Course from './course.model';
+import Person from './person.model';
+import LecturePresentation from './lecture-presentation.model';
 
 const Lecture = sequelize.define('lecture', {
   id: {
@@ -9,16 +11,38 @@ const Lecture = sequelize.define('lecture', {
     primaryKey: true,
     field: 'id',
   },
-  name: {
-    type: DataTypes.STRING(64),
-    field: 'name',
-  },
-  lectureStatusId: {
+  courseId: {
     type: DataTypes.INTEGER,
-    field: 'lecture_status_id',
+    field: 'course_id',
+    allowsNull: false,
+  },
+  lecturerId: {
+    type: DataTypes.INTEGER,
+    field: 'lecturer_id',
+    allowsNull: false,
+  },
+  lecturePresentationId: {
+    type: DataTypes.INTEGER,
+    field: 'lecture_presentation_id',
+    allowsNull: false,
+  },
+  name: {
+    type: DataTypes.STRING(128),
+    field: 'name',
+    allowsNull: false,
+  },
+  startDate: {
+    type: DataTypes.STRING(128),
+    field: 'startDate',
+  },
+  duration: {
+    type: DataTypes.DATE,
+    field: 'duration',
   },
 });
 
-Lecture.belongsTo(LectureStatus, { foreignKey: 'lectureStatusId' });
+Course.belongsTo(Lecture, { foreignKey: 'courseId' });
+Person.belongsTo(Lecture, { foreignKey: 'personId' });
+LecturePresentation.belongsTo(Lecture, { foreignKey: 'lecturePresentationId' });
 
 export default Lecture;
