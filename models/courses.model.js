@@ -4,7 +4,7 @@ import sequelize from './models.setup';
 import Specialization from './specialization.model';
 import Course from './course.model';
 
-const Courses = sequelize.define('subscriptions', {
+const Courses = sequelize.define('courses', {
   specializationId: {
     type: DataTypes.INTEGER,
     primaryKey: true,
