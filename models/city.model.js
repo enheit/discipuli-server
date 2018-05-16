@@ -11,15 +11,18 @@ const City = sequelize.define('city', {
   },
   countryId: {
     type: DataTypes.INTEGER,
-    field: 'country_id'
+    field: 'country_id',
+    allowNull: false,
   },
   name: {
     type: DataTypes.STRING(36),
     field: 'name',
+    allowNull: false,
   },
   isActive: {
     type: DataTypes.BOOLEAN,
     field: 'is_active',
+    allowNull: false,
   },
 });
 
