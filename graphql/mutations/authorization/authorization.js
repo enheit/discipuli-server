@@ -1,12 +1,11 @@
-import {
-  GraphQLObjectType
-} from 'graphql';
 import jwt from 'jsonwebtoken';
 
 import model from '../../../models';
 import { Credentials } from '../../inputs';
 import { JWT } from '../../types';
 import { secretKey } from '../../../src/configs/jwt.config';
+import { Base64 } from 'js-base64';
+import md5 from 'md5';
 
 export default {
   type: JWT,
@@ -17,27 +16,22 @@ export default {
     }
   },
   resolve(root, args, context) {
-    return model.personAccount.findOne({
-      attributes: ['personId'],
+    return model.PersonAccount.findOne({
       where: {
         email: args.credentials.email,
-        passwordHash: args.credentials.password
+        // The args.credentails.password should be Base64 encoded
+        passwordHash: md5(args.credentials.password)
       },
       include: [{
-        model: model.person,
-        attributes: ['id', 'firstName', 'lastName'],
-        include: [{
-          model: model.personRole,
-          attributes: ['role']
-        }],
+        model: model.PersonRole,
+        attributes: ['role'],
       }],
     })
-    .then(response => {
-      return response
+    .then(personAccount => {
+      return personAccount
         ? jwt.sign({
-            id: response.person.id,
-            fullName: `${response.person.firstName} ${response.person.lastName}`,
-            role: response.person.personRole.role,
+            accountId: personAccount.id,
+            role: personAccount.personRole.role,
           }, secretKey)
         : null;
     })
