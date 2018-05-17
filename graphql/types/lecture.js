@@ -9,8 +9,6 @@ import {
   GraphQLDateTime
 } from 'graphql-iso-date';
 
-import LectureStatus from './lecture-status';
-
 export default new GraphQLObjectType({
   name: 'Lecture',
   description: 'The lecture',
@@ -27,13 +25,6 @@ export default new GraphQLObjectType({
       description: 'The name of the lecture',
       resolve(lecture) {
         return lecture.name;
-      }
-    },
-    status: {
-      type: new GraphQLNonNull(GraphQLString),
-      description: 'The status of the lecture',
-      resolve(lecture) {
-        return lecture.status;
       }
     },
   },

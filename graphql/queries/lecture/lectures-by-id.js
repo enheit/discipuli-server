@@ -20,15 +20,11 @@ export default {
       where: {
         id: args.id,
       },
-      include: [{
-        model: model.lectureStatus,
-      }],
     }).then(lecture => {
       if(lecture) {
         return {
           id: lecture.id,
           name: lecture.name,
-          status: lecture.lectureStatus.status,
         }
       }
 
