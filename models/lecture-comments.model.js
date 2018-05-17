@@ -21,7 +21,7 @@ const LectureComments = sequelize.define('lectureComments', {
     allowNull: false,
   },
   comment: {
-    type: DataTypes.VARCHAR(1024),
+    type: DataTypes.STRING(1024),
     field: 'comment',
     allowNull: false,
   },

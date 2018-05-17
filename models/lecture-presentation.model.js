@@ -15,12 +15,12 @@ const LecturePresentation = sequelize.define('lecturePresentation', {
     allowNull: false,
   },
   name: {
-    type: DataTypes.VARCHAR(64),
+    type: DataTypes.STRING(64),
     field: 'name',
     allowNull: false,
   },
   description: {
-    type: DataTypes.VARCHAR(30000),
+    type: DataTypes.STRING(30000),
     field: 'description',
     allowNull: false,
   },

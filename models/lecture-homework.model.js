@@ -15,12 +15,12 @@ const LectureHomework = sequelize.define('lectureHomework', {
     allowNull: false,
   },
   name: {
-    type: DataTypes.VARCHAR(128),
+    type: DataTypes.STRING(128),
     field: 'name',
     allowNull: false,
   },
   description: {
-    type: DataTypes.VARCHAR(30000),
+    type: DataTypes.STRING(30000),
     field: 'description',
     allowNull: false,
   },

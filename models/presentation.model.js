@@ -21,12 +21,12 @@ const Presentation = sequelize.define('presentation', {
     allowsNull: false,
   },
   name: {
-    type: DataTypes.VARCHAR(128),
+    type: DataTypes.STRING(128),
     field: 'name',
     allowsNull: false,
   },
   description: {
-    type: DataTypes.VARCHAR(30000),
+    type: DataTypes.STRING(30000),
     field: 'description',
     allowsNull: false,
   },
