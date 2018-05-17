@@ -37,12 +37,5 @@ export default new GraphQLObjectType({
         return person.about;
       }
     },
-    role: {
-      type: new GraphQLNonNull(GraphQLString),
-      description: 'The role of the user',
-      resolve(person) {
-        return person.role;
-      }
-    },
   },
 });
