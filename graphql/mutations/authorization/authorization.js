@@ -20,7 +20,7 @@ export default {
       where: {
         email: args.credentials.email,
         // The args.credentails.password should be Base64 encoded
-        passwordHash: md5(args.credentials.password)
+        passwordHash: md5(Base64.decode(args.credentials.password))
       },
       include: [{
         model: model.PersonRole,
