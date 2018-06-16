@@ -5,6 +5,12 @@ import Specialization from './specialization.model';
 import Course from './course.model';
 
 const Courses = sequelize.define('courses', {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    field: 'id',
+    autoIncrement: true,
+  },
   specializationId: {
     type: DataTypes.INTEGER,
     primaryKey: true,

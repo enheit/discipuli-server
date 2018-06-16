@@ -8,6 +8,7 @@ const Course = sequelize.define('course', {
     type: DataTypes.INTEGER,
     primaryKey: true,
     field: 'id',
+    autoIncrement: true,
   },
   cityId: {
     type: DataTypes.INTEGER,
@@ -22,10 +23,12 @@ const Course = sequelize.define('course', {
   startDate: {
     type: DataTypes.DATE,
     field: 'start_date',
+    allowNull: false,
   },
   endDate: {
     type: DataTypes.DATE,
-    field: 'end_date'
+    field: 'end_date',
+    allowNull: false,
   },
 });
 

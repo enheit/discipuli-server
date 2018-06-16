@@ -18,6 +18,10 @@ const City = sequelize.define('city', {
     type: DataTypes.STRING(36),
     field: 'name',
     allowNull: false,
+    validate: {
+      len: [3, 36],
+      notEmpty: true,
+    },
   },
   isActive: {
     type: DataTypes.BOOLEAN,
@@ -26,6 +30,6 @@ const City = sequelize.define('city', {
   },
 });
 
-Country.belongsTo(City, { foreignKey: 'countryId' });
+City.belongsTo(Country, { foreignKey: 'countryId' });
 
 export default City;

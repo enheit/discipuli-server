@@ -16,6 +16,10 @@ const Country = sequelize.define('country', {
     type: DataTypes.STRING(64),
     field: 'name',
     allowNull: false,
+    validate: {
+      len: [3, 64],
+      notEmpty: true,
+    }
   },
   isActive: {
     type: DataTypes.BOOLEAN,
