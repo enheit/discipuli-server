@@ -1,6 +1,7 @@
 import { GraphQLError } from 'graphql';
 import jwt from 'jsonwebtoken';
 import md5 from 'md5';
+import { Base64 } from 'js-base64';
 
 import model from '../../../models';
 import { RegistrationFields } from '../../inputs';
@@ -31,7 +32,7 @@ export default {
       defaults: {
         email: args.registrationFields.email,
         // The args.registrationFields.password should be Base64 encoded
-        passwordHash: md5(args.registrationFields.password),
+        passwordHash: md5(Base64.decode(args.registrationFields.password)),
         roleId: 3, // User role
       },
       include: [{

@@ -15,8 +15,8 @@ export default {
       type: Credentials
     }
   },
-  resolve(root, args, context) {
-    return model.PersonAccount.findOne({
+  async resolve(root, args, context) {
+    const personAccount = await model.PersonAccount.findOne({
       where: {
         email: args.credentials.email,
         // The args.credentails.password should be Base64 encoded
@@ -24,19 +24,48 @@ export default {
       },
       include: [{
         model: model.PersonRole,
-        attributes: ['role'],
+        attributes: ['id', 'role'],
       }],
-    })
-    .then(personAccount => {
-      return personAccount
-        ? jwt.sign({
-            accountId: personAccount.id,
-            role: personAccount.personRole.role,
-          }, secretKey)
-        : null;
-    })
-    .catch(error => {
-      throw new Error(error);
     });
+
+    const permissions = await model.Permissions.findAll({
+      where: {
+        roleId: personAccount.personRole.id,
+      },
+      include: [{
+        model: model.PermissionSubject,
+        attributes: ['name'],
+      }],
+    });
+
+    // From [{action: 'create', permissionSubject: {name: 'course'}}}]
+    // to [{subject: 'course', actions: ['create']}]
+    const rules = permissions.reduce((acc, item) => {
+      const subject = item.permissionSubject.name;
+      const action = item.action;
+      const subjectIndex = acc.findIndex(rule => rule.subject === subject);
+
+      if(subjectIndex !== -1) {
+        acc[subjectIndex].actions.push(action);
+
+        return acc;
+      } else {
+        return [
+          ...acc,
+          {
+            subject: subject,
+            actions: [action]
+          }
+        ];
+      }
+    }, []);
+
+    return personAccount
+      ? jwt.sign({
+          accountId: personAccount.id,
+          role: personAccount.personRole.role,
+          rules: rules,
+        }, secretKey)
+      : null;
   }
 };
