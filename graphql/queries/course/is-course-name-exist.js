@@ -9,20 +9,22 @@ import model from '../../../models';
 export default {
   type: GraphQLBoolean,
   args: {
-    email: {
+    name: {
       type: new GraphQLNonNull(GraphQLString)
     }
   },
   resolve: async (root, args, context) => {
     try {
-      const email = await model.PersonAccount.findOne({
+      const course = await model.Course.findOne({
         where: {
-          email: args.email
+          name: {
+            ilike: args.name, // case-insensitive
+          },
         },
-        attributes: ['email']
+        attributes: ['name']
       });
 
-      return !!email;
+      return !!course;
     } catch (error) {
       console.error(error);
     }
