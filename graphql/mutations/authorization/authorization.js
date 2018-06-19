@@ -15,7 +15,7 @@ export default {
       type: Credentials
     }
   },
-  async resolve(root, args, context) {
+  resolve: async (root, args, context) => {
     const personAccount = await model.PersonAccount.findOne({
       where: {
         email: args.credentials.email,
@@ -28,37 +28,11 @@ export default {
       }],
     });
 
-    const permissions = await model.Permissions.findAll({
-      where: {
-        roleId: personAccount.personRole.id,
-      },
-      include: [{
-        model: model.PermissionSubject,
-        attributes: ['name'],
-      }],
-    });
+    const rules =  !!personAccount
+      ? await getRules(personAccount)
+      : [];
 
-    // From [{action: 'create', permissionSubject: {name: 'course'}}}]
-    // to [{subject: 'course', actions: ['create']}]
-    const rules = permissions.reduce((acc, item) => {
-      const subject = item.permissionSubject.name;
-      const action = item.action;
-      const subjectIndex = acc.findIndex(rule => rule.subject === subject);
-
-      if(subjectIndex !== -1) {
-        acc[subjectIndex].actions.push(action);
-
-        return acc;
-      } else {
-        return [
-          ...acc,
-          {
-            subject: subject,
-            actions: [action]
-          }
-        ];
-      }
-    }, []);
+    console.log(rules);
 
     return personAccount
       ? jwt.sign({
@@ -69,3 +43,39 @@ export default {
       : null;
   }
 };
+
+const getRules = async (personAccount) => {
+  const permissions = await model.Permissions.findAll({
+    where: {
+      roleId: personAccount.personRole.id,
+    },
+    include: [{
+      model: model.PermissionSubject,
+      attributes: ['name'],
+    }],
+  });
+
+  // From [{action: 'create', permissionSubject: {name: 'course'}}]
+  // to [{subject: 'course', actions: ['create']}]
+  const rules = permissions.reduce((acc, item) => {
+    const subject = item.permissionSubject.name;
+    const action = item.action;
+    const subjectIndex = acc.findIndex(rule => rule.subject === subject);
+
+    if(subjectIndex !== -1) {
+      acc[subjectIndex].actions.push(action);
+
+      return acc;
+    } else {
+      return [
+        ...acc,
+        {
+          subject: subject,
+          actions: [action]
+        }
+      ];
+    }
+  }, []);
+
+  return rules;
+}

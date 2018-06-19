@@ -19,7 +19,7 @@ export default {
     });
 
     const courses = await model.Courses.create({
-      courseId: course.id,
+      courseId: course.courseId,
       specializationId: args.courseCreationFields.specializationId,
     });
 
