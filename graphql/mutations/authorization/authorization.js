@@ -32,8 +32,6 @@ export default {
       ? await getRules(personAccount)
       : [];
 
-    console.log(rules);
-
     return personAccount
       ? jwt.sign({
           accountId: personAccount.id,
