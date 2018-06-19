@@ -8,3 +8,6 @@ export { default as Course } from './course';
 export { default as Specialization } from './specialization';
 export { default as Country } from './country';
 export { default as City } from './city';
+export { default as Presentation } from './presentation';
+export { default as Homework } from './homework';
+export { default as Task } from './task';

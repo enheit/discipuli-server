@@ -14,7 +14,7 @@ export default new GraphQLObjectType({
       type: new GraphQLNonNull(GraphQLID),
       description: 'Course\'s id',
       resolve(course) {
-        return course.id;
+        return course.courseId;
       }
     },
     name: {

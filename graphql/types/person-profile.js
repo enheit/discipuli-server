@@ -30,6 +30,13 @@ export default new GraphQLObjectType({
         return personProfile.lastName;
       }
     },
+    fullName: {
+      type: new GraphQLNonNull(GraphQLString),
+      description: 'The full name of the user',
+      resolve(personProfile) {
+        return `${personProfile.firstName} ${personProfile.lastName}`;
+      }
+    },
     email: {
       type: new GraphQLNonNull(GraphQLString),
       description: 'The email of a user\'s account',

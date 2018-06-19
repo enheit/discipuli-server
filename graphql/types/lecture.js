@@ -27,5 +27,42 @@ export default new GraphQLObjectType({
         return lecture.name;
       }
     },
+    lecturer: {
+      type: new GraphQLNonNull(GraphQLString),
+      description: 'The speacker of the lecture',
+      resolve(lecture) {
+        return lecture.lecturer;
+      },
+    },
+    startDate: {
+      type: new GraphQLNonNull(GraphQLDateTime),
+      description: 'The start date of the lecture',
+      resolve(lecture) {
+        return lecture.startDate;
+      },
+    },
+    endDate: {
+      type: new GraphQLNonNull(GraphQLDateTime),
+      description: 'The end date of the lecture',
+      resolve(lecture) {
+        return lecture.endDate;
+      },
+    },
   },
 });
+
+// courseId: {
+//   type: DataTypes.INTEGER,
+//   field: 'course_id',
+//   allowsNull: false,
+// },
+// lecturerId: {
+//   type: DataTypes.INTEGER,
+//   field: 'lecturer_id',
+//   allowsNull: false,
+// },
+// lecturePresentationId: {
+//   type: DataTypes.INTEGER,
+//   field: 'lecture_presentation_id',
+//   allowsNull: false,
+// },

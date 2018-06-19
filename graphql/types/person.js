@@ -20,14 +20,14 @@ export default new GraphQLObjectType({
       type: new GraphQLNonNull(GraphQLString),
       description: 'The name of the user',
       resolve(person) {
-        return person.first_name;
+        return person.firstName;
       }
     },
     lastName: {
       type: new GraphQLNonNull(GraphQLString),
       description: 'The surname of the user',
       resolve(person) {
-        return person.last_name;
+        return person.lastName;
       }
     },
     about: {
