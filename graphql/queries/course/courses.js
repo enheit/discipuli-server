@@ -15,7 +15,7 @@ export default {
       const result = await model.Courses.findAll({
         include: [{
           model: model.Course,
-          attributes: ['id', 'name', 'startDate', 'endDate'],
+          attributes: ['courseId', 'name', 'startDate', 'endDate'],
           include: [{
             model: model.City,
             attributes: ['name'],
@@ -30,10 +30,9 @@ export default {
         }],
       });
 
-
       return result.map(courses => {
         return {
-          id: courses.course.id,
+          courseId: courses.course.courseId,
           name: courses.course.name,
           country: courses.course.city.country.name,
           city: courses.course.city.name,
