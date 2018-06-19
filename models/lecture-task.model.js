@@ -8,6 +8,7 @@ const LectureTask = sequelize.define('lectureTask', {
     type: DataTypes.INTEGER,
     primaryKey: true,
     field: 'id',
+    autoIncrement: true,
   },
   parentId: {
     type: DataTypes.INTEGER,
@@ -28,6 +29,6 @@ const LectureTask = sequelize.define('lectureTask', {
   tableName: 'lecture_task',
 });
 
-Task.belongsTo(LectureTask, { foreignKey: 'parentId' });
+LectureTask.belongsTo(Task, { foreignKey: 'parentId' });
 
 export default LectureTask;

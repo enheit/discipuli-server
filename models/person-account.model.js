@@ -2,6 +2,7 @@ import { DataTypes } from 'sequelize';
 import sequelize from './models.setup';
 
 import PersonRole from './person-role.model';
+import Person from './person.model';
 
 const PersonAccount = sequelize.define('personAccount', {
   id: {
@@ -31,11 +32,18 @@ const PersonAccount = sequelize.define('personAccount', {
     type: DataTypes.INTEGER,
     field: 'role_id',
     allowNull: false,
+  },
+  personId: {
+    type: DataTypes.INTEGER,
+    field: 'person_id',
+    unique: true,
+    allowNull: false,
   }
 }, {
   tableName: 'person_account',
 });
 
 PersonAccount.belongsTo(PersonRole, { foreignKey: 'roleId' });
+PersonAccount.belongsTo(Person, { foreignKey: 'personId' });
 
 export default PersonAccount;

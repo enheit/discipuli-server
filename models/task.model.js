@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import sequelize from './models.setup';
 
-import Person from './person.model';
+import PersonAccount from './person-account.model';
 import Specialization from './specialization.model';
 
 const Task = sequelize.define('task', {
@@ -9,16 +9,7 @@ const Task = sequelize.define('task', {
     type: DataTypes.INTEGER,
     primaryKey: true,
     field: 'id',
-  },
-  specializationId: {
-    type: DataTypes.INTEGER,
-    field: 'specialization_id',
-    allowNull: false,
-  },
-  createdBy: {
-    type: DataTypes.INTEGER,
-    field: 'created_by',
-    allowNull: false,
+    autoIncrement: true,
   },
   name: {
     type: DataTypes.STRING(128),
@@ -30,9 +21,19 @@ const Task = sequelize.define('task', {
     field: 'description',
     allowNull: false,
   },
+  specializationId: {
+    type: DataTypes.INTEGER,
+    field: 'specialization_id',
+    allowNull: false,
+  },
+  createdBy: {
+    type: DataTypes.INTEGER,
+    field: 'created_by',
+    allowNull: false,
+  },
 });
 
-Specialization.belongsTo(Task, { foreignKey: 'specializationId' });
-Person.belongsTo(Task, { foreignKey: 'createdBy' });
+Task.belongsTo(Specialization, { foreignKey: 'specializationId' });
+Task.belongsTo(PersonAccount, { foreignKey: 'createdBy' });
 
 export default Task;

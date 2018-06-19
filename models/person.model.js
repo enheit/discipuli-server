@@ -1,8 +1,6 @@
 import { DataTypes } from 'sequelize';
 import sequelize from './models.setup';
 
-import PersonAccount from './person-account.model';
-
 const Person = sequelize.define('person', {
   id: {
     type: DataTypes.INTEGER,
@@ -32,14 +30,6 @@ const Person = sequelize.define('person', {
     type: DataTypes.STRING(1024),
     field: 'about',
   },
-  personAccountId: {
-    type: DataTypes.INTEGER,
-    field: 'person_account_id',
-    unique: true,
-    allowNull: false,
-  }
 });
-
-Person.belongsTo(PersonAccount, { foreignKey: 'personAccountId' });
 
 export default Person;

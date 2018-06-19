@@ -8,6 +8,7 @@ const LecturePresentation = sequelize.define('lecturePresentation', {
     type: DataTypes.INTEGER,
     primaryKey: true,
     field: 'id',
+    autoIncrement: true,
   },
   parentId: {
     type: DataTypes.INTEGER,
@@ -28,6 +29,6 @@ const LecturePresentation = sequelize.define('lecturePresentation', {
   tableName: 'lecture_presentation',
 });
 
-Presentation.belongsTo(LecturePresentation, { foreignKey: 'parentId' });
+LecturePresentation.belongsTo(Presentation, { foreignKey: 'parentId' });
 
 export default LecturePresentation;

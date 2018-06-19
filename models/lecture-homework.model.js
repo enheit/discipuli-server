@@ -7,7 +7,8 @@ const LectureHomework = sequelize.define('lectureHomework', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
-    field: 'person_id',
+    field: 'id',
+    autoIncrement: true,
   },
   parentId: {
     type: DataTypes.INTEGER,
@@ -28,6 +29,6 @@ const LectureHomework = sequelize.define('lectureHomework', {
   tableName: 'lecture_homework',
 });
 
-Homework.belongsTo(LectureHomework, { foreignKey: 'parentId' });
+LectureHomework.belongsTo(Homework, { foreignKey: 'parentId' });
 
 export default LectureHomework;

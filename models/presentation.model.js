@@ -1,24 +1,15 @@
 import { DataTypes } from 'sequelize';
 import sequelize from './models.setup';
 
-import Person from './person.model';
+import PersonAccount from './person-account.model';
 import Specialization from './specialization.model';
 
 const Presentation = sequelize.define('presentation', {
-  personId: {
+  id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
-    field: 'person_id',
-  },
-  specializationId: {
-    type: DataTypes.INTEGER,
-    field: 'specialization_id',
-    allowsNull: false,
-  },
-  createdBy: {
-    type: DataTypes.INTEGER,
-    field: 'created_by',
-    allowsNull: false,
+    field: 'id',
+    autoIncrement: true,
   },
   name: {
     type: DataTypes.STRING(128),
@@ -30,9 +21,19 @@ const Presentation = sequelize.define('presentation', {
     field: 'description',
     allowsNull: false,
   },
+  specializationId: {
+    type: DataTypes.INTEGER,
+    field: 'specialization_id',
+    allowsNull: false,
+  },
+  createdBy: {
+    type: DataTypes.INTEGER,
+    field: 'created_by',
+    allowsNull: false,
+  },
 });
 
-Specialization.belongsTo(Presentation, { foreignKey: 'specializationId' });
-Person.belongsTo(Presentation, { foreignKey: 'createdBy' });
+Presentation.belongsTo(Specialization, { foreignKey: 'specializationId' });
+Presentation.belongsTo(PersonAccount, { foreignKey: 'createdBy' });
 
 export default Presentation;

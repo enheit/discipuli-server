@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize';
 import sequelize from './models.setup';
 
 import Course from './course.model';
-import Person from './person.model';
+import PersonAccount from './person-account.model';
 import LecturePresentation from './lecture-presentation.model';
 
 const Lecture = sequelize.define('lecture', {
@@ -10,6 +10,7 @@ const Lecture = sequelize.define('lecture', {
     type: DataTypes.INTEGER,
     primaryKey: true,
     field: 'id',
+    autoIncrement: true,
   },
   courseId: {
     type: DataTypes.INTEGER,
@@ -32,17 +33,17 @@ const Lecture = sequelize.define('lecture', {
     allowsNull: false,
   },
   startDate: {
-    type: DataTypes.STRING(128),
-    field: 'startDate',
-  },
-  duration: {
     type: DataTypes.DATE,
-    field: 'duration',
+    field: 'start_date',
+  },
+  endDate: {
+    type: DataTypes.DATE,
+    field: 'end_date',
   },
 });
 
-Course.belongsTo(Lecture, { foreignKey: 'courseId' });
-Person.belongsTo(Lecture, { foreignKey: 'personId' });
-LecturePresentation.belongsTo(Lecture, { foreignKey: 'lecturePresentationId' });
+Lecture.belongsTo(Course, { foreignKey: 'courseId' });
+Lecture.belongsTo(PersonAccount, { foreignKey: 'lecturerId' });
+Lecture.belongsTo(LecturePresentation, { foreignKey: 'lecturePresentationId' });
 
 export default Lecture;

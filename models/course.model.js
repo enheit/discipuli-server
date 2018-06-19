@@ -4,7 +4,7 @@ import sequelize from './models.setup';
 import City from './city.model';
 
 const Course = sequelize.define('course', {
-  id: {
+  courseId: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     field: 'id',
