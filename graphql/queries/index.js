@@ -34,6 +34,9 @@ import {
   TasksBySpecializationId,
   TasksByLectureId
 } from './task';
+import {
+  CourseSubscriptions
+} from './subscription';
 
 export default {
   PersonById,
@@ -66,4 +69,6 @@ export default {
 
   TasksBySpecializationId,
   TasksByLectureId,
+
+  CourseSubscriptions,
 };
