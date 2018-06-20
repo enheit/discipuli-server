@@ -49,27 +49,6 @@ export default {
       personId: person.id,
     });
 
-    // const [personAccount, isCreated] = await model.PersonAccount.findOrCreate({
-    //   where: {
-    //     email: args.registrationFields.email,
-    //   },
-    //   defaults: {
-    //     email: args.registrationFields.email,
-    //     // The args.registrationFields.password should be Base64 encoded
-    //     passwordHash: md5(Base64.decode(args.registrationFields.password)),
-    //     roleId: 3, // User role
-    //   },
-    //   include: [{
-    //     model: model.PersonRole,
-    //   }],
-    // });
-
-    // if(!isCreated) {
-    //   throw new Error('The user with the same email address already exist!');
-    // }
-
-    console.log('dd', personAccount);
-
     const role = await model.PersonRole.findOne({
       where: {
         id: personAccount.roleId
