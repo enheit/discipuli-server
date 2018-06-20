@@ -11,3 +11,4 @@ export { default as City } from './city';
 export { default as Presentation } from './presentation';
 export { default as Homework } from './homework';
 export { default as Task } from './task';
+export { default as Subscription } from './subscription';

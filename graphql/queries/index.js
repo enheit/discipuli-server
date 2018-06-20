@@ -14,6 +14,7 @@ import {
   Courses,
   IsCourseNameExist,
   CourseById,
+  NotSubscribedCourses
 } from './course';
 import {
   Specializations,
@@ -45,6 +46,7 @@ export default {
   Courses,
   IsCourseNameExist,
   CourseById,
+  NotSubscribedCourses,
 
   Specializations,
   SpecializationByCourseId,

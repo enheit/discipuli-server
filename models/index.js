@@ -20,6 +20,7 @@ import LectureHomework from './lecture-homework.model';
 import LectureHomeworks from './lecture-homeworks.model';
 import LectureTask from './lecture-task.model';
 import LectureTasks from './lecture-tasks.model';
+import Subscriptions from './subscriptions.model';
 
 export default {
   Person,
@@ -44,4 +45,5 @@ export default {
   LectureHomeworks,
   LectureTask,
   LectureTasks,
+  Subscriptions,
 };

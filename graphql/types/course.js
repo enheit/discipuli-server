@@ -52,6 +52,7 @@ export default new GraphQLObjectType({
         return course.endDate;
       }
     },
+    // TODO: Should be removed from the course
     specializationId: {
       type: new GraphQLNonNull(GraphQLID),
       description: 'The id of the course specialization',
@@ -59,6 +60,7 @@ export default new GraphQLObjectType({
         return course.specializationId;
       }
     },
+    // TODO: Should be removed from the course
     specialization: {
       type: new GraphQLNonNull(GraphQLID),
       description: 'The name of the specialization',

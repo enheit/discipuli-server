@@ -1,14 +1,20 @@
 import { DataTypes } from 'sequelize';
 import sequelize from './models.setup';
 
-import Person from './person.model';
+import PersonAccount from './person-account.model';
 import Course from './course.model';
 
 const Subscriptions = sequelize.define('subscriptions', {
-  personId: {
+  id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
-    field: 'person_id',
+    field: 'id',
+    autoIncrement: true,
+  },
+  personAccountId: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    field: 'person_account_id',
   },
   courseId: {
     type: DataTypes.INTEGER,
@@ -17,7 +23,7 @@ const Subscriptions = sequelize.define('subscriptions', {
   },
 });
 
-Person.belongsTo(Subscriptions, { foreignKey: 'personId' });
-Course.belongsTo(Subscriptions, { foreignKey: 'courseId' });
+Subscriptions.belongsTo(PersonAccount, { foreignKey: 'personAccountId' });
+Subscriptions.belongsTo(Course, { foreignKey: 'courseId' });
 
 export default Subscriptions;
